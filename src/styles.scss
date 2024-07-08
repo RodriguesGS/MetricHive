@@ -1,0 +1,13 @@
+@import '../src/styles/variables.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    position: relative;
+    background-color: $background-color;
+}

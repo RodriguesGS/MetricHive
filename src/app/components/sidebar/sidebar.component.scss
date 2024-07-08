@@ -1,0 +1,121 @@
+@import '../../../styles/variables.scss';
+
+.sidebar {
+    background: linear-gradient(to bottom, $dark-blue, $color-main, $light-blue);
+    position: fixed;
+    transition: all .3s ease;
+    z-index: 1;
+    top: 0;
+    width: 5rem;
+    height: 100vh;
+    box-shadow: 0 4px 8px rgba(0, 71, 171, 0.5);
+
+    .line {
+        width: 85%;
+        height: 1px;
+        background-color: $white-text;
+        margin: 1.5rem auto;
+        opacity: .4;
+    }
+
+    .logo-container {
+        display: flex;
+        align-items: center;
+        padding: 1rem 1rem 0 1rem;
+        width: 100%;
+
+        .logo {
+            background-color: $btn-color;
+            text-align: center;
+            color: $white-text;
+            width: 3rem;
+            min-width: 3rem;
+            border-radius: 10px;
+            padding: 5px;
+            font-size: 1.5rem;
+            border: none;
+            font-weight: 900;
+            cursor: pointer;
+
+            &:hover {
+                box-shadow: 0 0 15px $btn-color;
+                text-shadow: 0 0 15px $white-text;
+            }
+        }
+
+        .logo-text {
+            margin-left: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: $white-text;
+        }
+
+        .btn-close {
+            margin-left: auto;
+            cursor: pointer;
+            width: 2rem;
+            min-width: 2rem;
+            border-radius: 50%;
+            border: none;
+            background-color: transparent;
+            color: $white-text;
+            font-size: 2.5rem;
+
+        }
+    }
+
+    .sidebar-nav {
+        list-style-type: none;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        height: calc(100% - 3.5rem);
+        cursor: pointer;
+
+        .sidebar-nav-item {
+            width: 100%;
+            margin-bottom: 10px;
+
+            .sidebar-nav-link {
+                display: flex;
+                align-items: center;
+                height: 3rem;
+                color: $white-text;
+                text-decoration: none;
+                border-radius: 10px;
+                transition: all .3s ease;
+
+                .sidebar-link-icon {
+                    width: 2rem;
+                    min-width: 2rem;
+                    text-align: center;
+                    margin: 0 .5rem;
+                }
+
+                .sidebar-link-text {
+                    margin-left: 1.5rem;
+                    font-size: 1.3rem;
+                }
+
+                &:hover {
+                    background-color: $hover;
+                }
+            }
+        }
+    }
+}
+
+.sidebar-collapsed {
+    width: 280px;
+}
+
+.active {
+    background-color: $hover;
+
+    .sidebar-link-icon,
+    .sidebar-link-text {
+        font-weight: 700;
+        text-shadow: 0 0 15px $white-text;
+    }
+}
