@@ -1,0 +1,19 @@
+<div class="sidebar" [ngClass]="collapsed ? 'sidebar-collapsed': ''">
+    <div class="logo-container">
+        <button class="logo" (click)="toggleCollapse()">M</button>
+        <div class="logo-text" *ngIf="collapsed">MetricHive</div>
+        <button class="btn-close" *ngIf="collapsed" (click)="closeSidebar()">&times;</button>
+    </div>
+    <div class="line"></div>
+    <ul class="sidebar-nav">
+        <li class="sidebar-nav-item" *ngFor="let data of navData">
+            <a class="sidebar-nav-link" [routerLink]="data.routeLink"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+            >
+                <img class="sidebar-link-icon" [src]="data.icon" alt="{{data.label}} icon">
+                <span class="sidebar-link-text" *ngIf="collapsed">{{data.label}}</span>
+            </a>
+        </li>
+    </ul>
+</div>
