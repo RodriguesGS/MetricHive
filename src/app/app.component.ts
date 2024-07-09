@@ -7,12 +7,13 @@ interface SideBarToggle {
   screenWidth: number;
   collapsed: boolean;
 }
+
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.scss',
-    imports: [RouterOutlet, SidebarComponent, BodyComponent]
+  selector: 'app-root',
+  standalone: true,
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  imports: [RouterOutlet, SidebarComponent, BodyComponent]
 })
 export class AppComponent {
   title = 'MetricHive';
@@ -20,7 +21,7 @@ export class AppComponent {
   isSideBarCollapsed = false;
   screenWidth = 0;
 
-  onToggleSideBar(data: SideBarToggle):void {
+  onToggleSideBar(data: SideBarToggle): void {
     this.screenWidth = data.screenWidth;
     this.isSideBarCollapsed = data.collapsed;
   }
