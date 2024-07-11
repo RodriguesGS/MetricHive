@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from "../header/header.component";
 
 @Component({
   selector: 'app-body',
   standalone: true,
-  imports: [ CommonModule, RouterOutlet ],
+  imports: [CommonModule, RouterOutlet, HeaderComponent],
   templateUrl: './body.component.html',
   styleUrl: './body.component.scss'
 })

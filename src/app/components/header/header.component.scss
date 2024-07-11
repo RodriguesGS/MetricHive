@@ -1,0 +1,54 @@
+@import '../../../styles/variables.scss';
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .search-bar {
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        padding: 6px 12px;
+        border-radius: 10px;
+        transition: all .3s ease;
+
+        input {
+            border: none;
+            background-color: transparent;
+            width: 13rem;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .search {
+            cursor: pointer;
+        }
+
+        &:hover {
+            background-color: #ddd;
+        }
+
+        &:focus {
+            background-color: #000;
+        }
+    }
+
+    .tools {
+        display: flex;
+        gap: 10px;
+
+        button {
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            transition: .3s ease;
+
+            &:hover {
+                background-color: #dddddd;
+            }
+        }
+    }
+}

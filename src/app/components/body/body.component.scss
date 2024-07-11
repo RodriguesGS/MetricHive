@@ -1,3 +1,5 @@
+@import '../../../styles/variables.scss';
+
 .body {
     width: calc(100% - 5rem);
     height: 100vh;
@@ -5,14 +7,14 @@
     z-index: 0;
     position: relative;
     top: 0;
-    transition: all 0.5s ease;
-    background: #f4f7fa;
+    transition: all .5s ease;
+    background: $background-color;
     padding: 3rem;
   }
   
   .body-trimmed {
     width: calc(100% - 280px);
-    margin-left: 16.5625rem;
+    margin-left: 16.5rem;
   }
   
   .body-md-screen {
