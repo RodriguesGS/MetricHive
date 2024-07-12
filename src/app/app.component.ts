@@ -10,9 +10,9 @@ interface SideBarToggle {
 @Component({
     selector: 'app-root',
     standalone: true,
+    imports: [RouterOutlet, SidebarComponent, BodyComponent],
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    imports: [RouterOutlet, SidebarComponent, BodyComponent]
+    styleUrl: './app.component.scss',   
 })
 export class AppComponent {
   title = 'MetricHive';
