@@ -1,0 +1,11 @@
+<div *ngIf="!consentGiven" class="cookies-banner">
+    <div class="cookies-content">
+        <mat-icon class="close-cookies" (click)="closeBanner()">close</mat-icon>
+        <h3>Cookies</h3>
+        <p>Usamos cookies para melhorar sua experiência. Ao continuar navegando, você concorda com o uso de cookies.</p>
+        <div class="cookies-btn">
+            <button (click)="acceptCookies()" class="accept-cookies">Aceitar</button>
+            <button (click)="rejectCookies()" class="reject-cookies">Rejeitar</button>
+        </div>
+    </div>
+</div>

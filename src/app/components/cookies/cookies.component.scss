@@ -1,0 +1,63 @@
+@import '../../../styles/variables.scss';
+
+.cookies-banner {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #fff;
+  color: #000;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  z-index: 2;
+  max-width: 350px;
+
+  &.hidden {
+    display: none;
+  }
+
+  .cookies-content {
+    position: relative;
+
+    .close-cookies {
+      position: absolute;
+      top: 0;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    p {
+      font-size: .9rem;
+      margin-bottom: 20px;
+    }
+
+    .cookies-btn {
+      display: flex;
+      justify-content: space-around;
+
+      button {
+        background-color: #111;
+        color: $white-text;
+        padding: 10px 20px;
+        font-size: 1rem;
+        border-radius: 5px;
+        transition: .2s;
+        border: 1px solid #111;
+
+        &:hover {
+          background-color: transparent;
+          color: $black-text;
+        }
+      }
+    }
+  }
+}
