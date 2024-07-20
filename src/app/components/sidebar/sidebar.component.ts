@@ -1,7 +1,9 @@
-import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { navbarData } from './nav-data';
+import { fromEvent } from 'rxjs';
+import { throttleTime } from 'rxjs/operators';
 
 interface SideBarToggle {
   screenWidth: number;
@@ -13,7 +15,7 @@ interface SideBarToggle {
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent implements OnInit {
 
@@ -23,18 +25,24 @@ export class SidebarComponent implements OnInit {
   screenWidth = 0;
   navData = navbarData;
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.screenWidth = window.innerWidth;
-
-    if (this.screenWidth <= 768) {
-      this.collapsed = false;
-      this.onToggleSideBar.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
-    }
-  }
-
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
+
+    fromEvent(window, 'resize').pipe(
+      throttleTime(500)
+    ).subscribe(event => this.onResize(event))
+    
+  }
+
+  onResize(event: Event): void {
+    this.screenWidth = window.innerWidth;
+  
+    if (this.screenWidth <= 768) {
+      this.collapsed = true;
+    } else {
+      this.collapsed = false;
+    }
+    this.onToggleSideBar.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
   }
 
   toggleCollapse(): void {

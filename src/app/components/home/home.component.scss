@@ -1,0 +1,129 @@
+@import '../../../styles/variables.scss';
+
+:host {
+    display: block;
+    padding-top: 50px;
+
+    .cards {
+        display: flex;
+        justify-content: space-around;
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-radius: 8px;
+            width: 17.75rem;
+            height: 11.5rem;
+            transition: .3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+
+            .card-content {
+                display: grid;
+                padding: 20px;
+                grid-template-columns: 1fr 1fr;
+                align-items: center;    
+
+                .text-card {
+                    display: grid;
+                    row-gap: 20px;
+
+                    .card-amount {
+                        font-size: 4rem;
+                        font-weight: bold;
+                        margin: 0;
+                    }
+
+                    .card-desc {
+                        font-size: 1.2rem;
+                        margin: 0;
+                    } 
+                }
+
+                .icon {
+                    width: 100px;
+                    height: 100px;
+                    font-size: 6rem;
+                    opacity: .3;
+                }     
+            }
+
+            .link-card {
+                text-align: center;
+                border-radius: 0 0 8px 8px;
+                
+
+                a {
+                    font-size: 1rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 8px 0;
+
+                    mat-icon {
+                        transition: transform .3s;
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+
+        .card:nth-child(1) {
+            background-color: $card-color1;
+            color: $white-text;
+           
+
+            .link-card {
+                background-color: darken($card-color1, 20%);
+
+                &:hover {
+                    mat-icon {
+                        transform: translateX(5px);
+                    }
+                }
+            }
+
+            &:hover {
+                box-shadow: 0px 0px 20px 0px $card-color1;
+            }
+        }
+
+        .card:nth-child(2) {
+            background-color: $card-color2;
+            color: $white-text;
+
+            .link-card {
+                background-color: darken($card-color2, 20%);
+
+                &:hover {
+                    mat-icon {
+                        transform: translateX(5px);
+                    }
+                }
+            }
+
+            &:hover {
+                box-shadow: 0px 0px 20px 0px $card-color2;
+            }
+        }
+
+        .card:nth-child(3) {
+            background-color: $card-color3;
+            color: $white-text;
+
+            .link-card {
+                background-color: darken($card-color3, 20%);
+
+                &:hover {
+                    mat-icon {
+                        transform: translateX(5px);
+                    }
+                }
+            }
+
+            &:hover {
+                box-shadow: 0px 0px 20px 0px $card-color3;
+            }
+        }
+    }
+}

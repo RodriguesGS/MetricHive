@@ -15,4 +15,10 @@ body {
 button {
   background-color: transparent;
   border: none;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: $white-text;
 }
