@@ -38,3 +38,28 @@
         </div>
     </div>
 </div>
+
+<div class="todo-container">
+  <h2>Tarefas</h2>
+  <div class="input-content">
+    <input [(ngModel)]="newTask" type="text" placeholder="Digite sua tarefa">
+    <button (click)="addTask()">Adicionar</button>
+  </div>
+  
+  <ul class="list-todo">
+    <li class="list-item" *ngFor="let task of tasks">
+      <div class="checkbox-wrapper">
+        <input type="checkbox" [checked]="task.completed" (change)="toggleTaskCompletion(task)" [id]="'task-' + task.id">
+        <label [for]="'task-' + task.id" [ngClass]="{'completed': task.completed}">{{ task.name }}</label>
+      </div>
+      <div class="btn-todo">
+        <button class="btn-edit" (click)="editTask(task)">
+          <mat-icon class="icon-btn">edit</mat-icon>
+        </button>
+        <button class="btn-delete" (click)="deleteTask(task)">
+          <mat-icon class="icon-btn">delete</mat-icon>
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>
