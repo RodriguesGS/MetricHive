@@ -1,0 +1,102 @@
+@import "../../../styles/variables.scss";
+
+:host {
+    padding: 30px 0 50px 0;
+    display: block;
+
+    h2 {
+        font-size: 2.3rem;
+
+        &::after {
+            content: "";
+            display: block;
+            width: 8%;
+            height: 2px;
+            margin-top: 3px;
+            background-color: $color-main;
+        }
+    }
+
+    .forms-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 300px;
+
+        .form-text {
+            width: 60ch;
+            margin-bottom: 30px;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+
+            input, textarea {
+                border: none;
+                font-size: 1rem;
+                padding: 12px 24px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                transition: all .3s ease;
+                box-shadow: 0 0 3px 1px #0000001c;
+
+                &:hover {
+                    background-color: #ddd;
+                }
+
+                &:focus {
+                    outline: none;
+                    box-shadow: 0 0 3px 1px $color-main;
+                    background-color: #ddd;
+                }
+            }
+
+            .btn-forms {
+                background-color: $btn-color;
+                color: $white-text;
+                font-size: 1rem;
+                padding: 16px 20px;
+                border-radius: 10px;
+                width: 200px;
+                transition: .3s ease;
+
+                &:hover {
+                    background-color: $hover;
+                }
+            }
+        }
+
+        .contact-info {
+            h3 {
+                font-size: 2rem;
+                font-weight: 500;
+                margin-bottom: 50px;
+            }
+
+            .info {
+                margin-bottom: 30px;
+
+                h4 {
+                    font-weight: bold;
+                    font-size: 1.3rem;
+                    margin-bottom: 5px;
+                }
+
+                .img-icons {
+                    display: flex;
+                    gap: 30px;
+
+                    .icon-info {
+                        width: 50px;
+                        cursor: pointer;
+                        transition: .3s;
+
+                        &:hover {
+                            filter: invert(56%) sepia(67%) saturate(1610%) hue-rotate(192deg) brightness(92%) contrast(101%);
+                        }
+                    }
+                }
+            }    
+        }
+    }
+}
