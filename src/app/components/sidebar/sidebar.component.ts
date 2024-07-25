@@ -18,7 +18,6 @@ interface SideBarToggle {
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent implements OnInit {
-
   @Output() onToggleSideBar: EventEmitter<SideBarToggle> = new EventEmitter();
 
   collapsed = false;
@@ -53,5 +52,4 @@ export class SidebarComponent implements OnInit {
   private emitSidebarToggleEvent(): void {
     this.onToggleSideBar.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
   }
-
 }

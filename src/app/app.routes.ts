@@ -12,5 +12,4 @@ export const routes: Routes = [
     { path: 'client', component: ClientComponent },
     { path: 'nfe', component: NfeComponent },
     { path: 'settings', component: SettingsComponent }
-    
 ];
