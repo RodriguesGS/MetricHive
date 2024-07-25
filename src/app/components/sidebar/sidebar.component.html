@@ -6,13 +6,10 @@
     </div>
     <div class="line"></div>
     <ul class="sidebar-nav">
-        <li class="sidebar-nav-item" *ngFor="let data of navData">
-            <a class="sidebar-nav-link" [routerLink]="data.routeLink"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-            >
-                <img class="sidebar-link-icon" [src]="data.icon" alt="{{data.label}} icon">
-                <span class="sidebar-link-text" *ngIf="collapsed">{{data.label}}</span>
+        <li class="sidebar-nav-item" *ngFor="let item of navData">
+            <a class="sidebar-nav-link" [routerLink]="item.routeLink" routerLinkActive="active"[routerLinkActiveOptions]="{ exact: true }">
+                <img class="sidebar-link-icon" [src]="item.icon" [alt]="item.label + ' icon'">
+                <span class="sidebar-link-text" *ngIf="collapsed">{{ item.label }}</span>
             </a>
         </li>
     </ul>
