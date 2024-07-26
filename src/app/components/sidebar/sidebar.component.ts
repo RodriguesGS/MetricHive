@@ -13,12 +13,11 @@ interface SideBarToggle {
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [ CommonModule, RouterModule ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent implements OnInit {
-
   @Output() onToggleSideBar: EventEmitter<SideBarToggle> = new EventEmitter();
 
   collapsed = false;
@@ -26,23 +25,18 @@ export class SidebarComponent implements OnInit {
   navData = navbarData;
 
   ngOnInit(): void {
-    this.screenWidth = window.innerWidth;
-
-    fromEvent(window, 'resize').pipe(
-      throttleTime(500)
-    ).subscribe(event => this.onResize(event))
-    
+    this.screenWidth = window.innerWidth; 
+    this.handleResizeEvents(); 
   }
 
-  onResize(event: Event): void {
-    this.screenWidth = window.innerWidth;
+  private handleResizeEvents(): void {
+    fromEvent(window, 'resize').pipe(throttleTime(500)).subscribe(() => this.updateSidebarState());
+  }
   
-    if (this.screenWidth <= 768) {
-      this.collapsed = true;
-    } else {
-      this.collapsed = false;
-    }
-    this.onToggleSideBar.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
+  private updateSidebarState(): void {
+    this.screenWidth = window.innerWidth;
+    this.collapsed = this.screenWidth <= 768;
+    this.emitSidebarToggleEvent();
   }
 
   toggleCollapse(): void {
@@ -52,6 +46,10 @@ export class SidebarComponent implements OnInit {
 
   closeSidebar(): void {
     this.collapsed = false;
+    this.onToggleSideBar.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
+  }
+
+  private emitSidebarToggleEvent(): void {
     this.onToggleSideBar.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
   }
 }

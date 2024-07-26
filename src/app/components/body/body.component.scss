@@ -1,24 +1,23 @@
-@import '../../../styles/variables.scss';
+@import "../../../styles/variables.scss";
 
 .body {
-    width: calc(100% - 5rem);
-    height: 100dvh;
-    margin-left: 5rem;
-    z-index: 0;
-    position: relative;
-    top: 0;
-    transition: all .5s ease;
-    background: $background-color;
-    padding: 3rem;
-  }
-  
-  .body-trimmed {
-    width: calc(100% - 280px);
-    margin-left: 16.5rem;
-  }
-  
-  .body-md-screen {
-    width: calc(100% - 5rem);
-    margin-left: 5rem;
-  }
-  
+  width: calc(100% - 5rem);
+  height: 100dvh;
+  margin-left: 5rem;
+  z-index: 0;
+  position: relative;
+  top: 0;
+  transition: all 0.5s ease;
+  background: $background-color;
+  padding: 3rem;
+}
+
+.body-trimmed {
+  width: calc(100% - 280px);
+  margin-left: 16.5rem;
+}
+
+.body-md-screen {
+  width: calc(100% - 5rem);
+  margin-left: 5rem;
+}

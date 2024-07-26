@@ -13,11 +13,10 @@ interface SideBarToggle {
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [RouterOutlet, SidebarComponent, BodyComponent, CookiesComponent]
+    imports: [ RouterOutlet, SidebarComponent, BodyComponent, CookiesComponent ]
 })
 export class AppComponent {
   title = 'MetricHive';
-
   isSideBarCollapsed = false;
   screenWidth = 0;
 

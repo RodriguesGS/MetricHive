@@ -1,284 +1,281 @@
 @import '../../../styles/variables.scss';
 
 :host {
-    display: block;
-    padding-top: 50px;
+  display: block;
+  padding-top: 50px;
 
-    .cards {
+  .cards {
+    display: flex;
+    justify-content: space-around;
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 8px;
+      width: 17.75rem;
+      height: 11.5rem;
+      transition: .3s;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+      
+      &.card-color1 {
+        background-color: $card-color1;
+        color: $white-text;
+
+        .link-card {
+          background-color: darken($card-color1, 20%);
+
+          &:hover {
+            mat-icon {
+              transform: translateX(5px);
+            }
+          }
+        }
+
+        &:hover {
+          box-shadow: 0px 0px 20px 0px $card-color1;
+        }
+      }
+
+      &.card-color2 {
+        background-color: $card-color2;
+        color: $white-text;
+
+        .link-card {
+          background-color: darken($card-color2, 20%);
+
+          &:hover {
+            mat-icon {
+              transform: translateX(5px);
+            }
+          }
+        }
+
+        &:hover {
+          box-shadow: 0px 0px 20px 0px $card-color2;
+        }
+      }
+
+      &.card-color3 {
+        background-color: $card-color3;
+        color: $white-text;
+
+        .link-card {
+          background-color: darken($card-color3, 20%);
+
+          &:hover {
+            mat-icon {
+              transform: translateX(5px);
+            }
+          }
+        }
+
+        &:hover {
+          box-shadow: 0px 0px 20px 0px $card-color3;
+        }
+      }
+
+      .card-content {
+        display: grid;
+        padding: 20px;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+
+        .text-card {
+          display: grid;
+          row-gap: 20px;
+
+          .card-amount {
+            font-size: 4rem;
+            font-weight: bold;
+            margin: 0;
+          }
+
+          .card-desc {
+            font-size: 1.2rem;
+            margin: 0;
+          }
+        }
+
+        .icon {
+          width: 100px;
+          height: 100px;
+          font-size: 6rem;
+          opacity: .3;
+        }
+      }
+
+      .link-card {
+        text-align: center;
+        border-radius: 0 0 8px 8px;
+
+        a {
+          font-size: 1rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 8px 0;
+
+          mat-icon {
+            transition: transform .3s;
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+  }
+
+  .todo-container {
+    padding-top: 100px;
+
+    h2 {
+      font-size: 2.3rem;
+
+      &::after {
+        content: "";
+        display: block;
+        width: 8%;
+        height: 2px;
+        margin-top: 3px;
+        background-color: $color-main;
+      }
+    }
+
+    .input-content {
+      margin-top: 40px;
+      display: flex;
+      gap: 10px;
+
+      input {
+        background-color: #fff;
+        border: none;
+        padding: 10px 15px;
+        font-size: 1rem;
+        border-radius: 25px;
+        transition: all .3s ease-in-out;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.116);
+
+        &:hover {
+          background-color: #ddd;
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+          background-color: #ddd;
+        }
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: $btn-color;
+        color: $white-text;
+        font-weight: 600;
+        font-size: 1rem;
+        border-radius: 10px;
+        transition: .3s ease-in-out;
+
+        &:hover {
+          background-color: $hover;
+        }
+      }
+    }
+
+    .list-todo {
+      margin-top: 20px;
+
+      .list-item {
         display: flex;
-        justify-content: space-around;
+        align-items: center;
+        transition: .3s ease;
 
-        .card {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border-radius: 8px;
-            width: 17.75rem;
-            height: 11.5rem;
-            transition: .3s;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
-
-            .card-content {
-                display: grid;
-                padding: 20px;
-                grid-template-columns: 1fr auto;
-                align-items: center;    
-
-                .text-card {
-                    display: grid;
-                    row-gap: 20px;
-
-                    .card-amount {
-                        font-size: 4rem;
-                        font-weight: bold;
-                        margin: 0;
-                    }
-
-                    .card-desc {
-                        font-size: 1.2rem;
-                        margin: 0;
-                    } 
-                }
-
-                .icon {
-                    width: 100px;
-                    height: 100px;
-                    font-size: 6rem;
-                    opacity: .3;
-                }     
-            }
-
-            .link-card {
-                text-align: center;
-                border-radius: 0 0 8px 8px;
-                
-
-                a {
-                    font-size: 1rem;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 8px 0;
-
-                    mat-icon {
-                        transition: transform .3s;
-                        margin-left: 5px;
-                    }
-                }
-            }
+        &:hover {
+          .btn-todo {
+            opacity: 1;
+            visibility: visible;
+          }
         }
 
-        .card:nth-child(1) {
-            background-color: $card-color1;
-            color: $white-text;
-           
+        .checkbox-wrapper {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          user-select: none;
+          margin: 10px 0;
+          font-size: 1.3rem;
 
-            .link-card {
-                background-color: darken($card-color1, 20%);
+          input {
+            appearance: none;
+            background-color: $background-color;
+            border: 2px solid #a7a7a7;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            width: 25px;
+            height: 25px;
+            margin-right: 10px;
+            transition: all .3s ease;
 
-                &:hover {
-                    mat-icon {
-                        transform: translateX(5px);
-                    }
-                }
+            &:checked {
+              background-color: $color-main;
+              border-color: $color-main;
+              background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjZThlYWVkIj48cGF0aCBkPSJNMzgyLTI0MCAxNTQtNDY4bDU3LTU3IDE3MSAxNzEgMzY3LTM2NyA1NyA1Ny00MjQgNDI0WiIvPjwvc3ZnPg==');
+              background-size: 25px 25px;
+              background-position: center;
+              background-repeat: no-repeat;
+
+              & + label {
+                text-decoration: line-through;
+                color: #ADADAD;
+              }
             }
+          }
+        }
+      }
 
-            &:hover {
-                box-shadow: 0px 0px 20px 0px $card-color1;
-            }
+      .btn-todo {
+        display: flex;
+        gap: 10px;
+        margin-left: 20px;
+        opacity: 0;
+        visibility: hidden;
+        transition: .3s;
+
+        .icon-btn {
+          color: #ADADAD;
+          transition: .3s;
         }
 
-        .card:nth-child(2) {
-            background-color: $card-color2;
-            color: $white-text;
+        .btn-edit {
+          padding: 2px;
+          transition: .3s;
+          border-radius: 5px;
 
-            .link-card {
-                background-color: darken($card-color2, 20%);
+          &:hover {
+            background-color: #61f144;
 
-                &:hover {
-                    mat-icon {
-                        transform: translateX(5px);
-                    }
-                }
+            .icon-btn {
+              color: #fff;
             }
-
-            &:hover {
-                box-shadow: 0px 0px 20px 0px $card-color2;
-            }
+          }
         }
 
-        .card:nth-child(3) {
-            background-color: $card-color3;
-            color: $white-text;
+        .btn-delete {
+          padding: 2px;
+          transition: .3s;
+          border-radius: 5px;
 
-            .link-card {
-                background-color: darken($card-color3, 20%);
+          &:hover {
+            background-color: #f14444;
 
-                &:hover {
-                    mat-icon {
-                        transform: translateX(5px);
-                    }
-                }
+            .icon-btn {
+              color: $white-text;
             }
-
-            &:hover {
-                box-shadow: 0px 0px 20px 0px $card-color3;
-            }
+          }
         }
+      }
     }
-
-
-    .todo-container {
-        padding-top: 100px;
-
-        h2 {
-            font-size: 2.3rem;
-
-            &::after {
-                content: "";
-                display: block;
-                width: 8%;
-                height: 2px;
-                margin-top: 3px;
-                background-color: $color-main;
-            }
-        }
-
-        .input-content {
-            margin-top: 40px;
-            display: flex;
-            gap: 10px;
-
-            input {
-                background-color: #fff;
-                border: none;
-                padding: 10px 15px;
-                font-size: 1rem;
-                border-radius: 25px;
-                transition: all .3s ease-in-out;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.116);
-
-                &:hover {
-                    background-color: #ddd;
-                }
-            
-                &:focus {
-                    outline: none;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-                    background-color: #ddd;
-                }
-            }
-
-            button {
-                padding: 10px 20px;
-                background-color: $btn-color;
-                color: $white-text;
-                font-weight: 600;
-                font-size: 1rem;
-                border-radius: 10px;
-                transition: .3s ease-in-out;
-
-                &:hover {
-                    background-color: $hover;
-                }
-            }
-        }
-
-        .list-todo {
-            margin-top: 20px;
-
-            .list-item {
-                display: flex;
-                align-items: center;
-                transition: .3s ease;
-
-                &:hover {
-                    .btn-todo {
-                        opacity: 1;
-                        visibility: visible;
-                    }
-                }
-                
-                .checkbox-wrapper {
-                    display: flex;
-                    align-items: center;
-                    cursor: pointer;
-                    user-select: none;
-                    margin: 10px 0;
-                    font-size: 1.3rem;
-
-                    input {
-                        appearance: none;
-                        background-color: $background-color;
-                        border: 2px solid #a7a7a7;
-                        padding: 10px;
-                        border-radius: 5px;
-                        display: inline-block;
-                        position: relative;
-                        cursor: pointer;
-                        width: 25px;
-                        height: 25px;
-                        margin-right: 10px;
-                        transition: all .3s ease;
-
-                        &:checked {
-                            background-color: $color-main;
-                            border-color: $color-main;
-                            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjZThlYWVkIj48cGF0aCBkPSJNMzgyLTI0MCAxNTQtNDY4bDU3LTU3IDE3MSAxNzEgMzY3LTM2NyA1NyA1Ny00MjQgNDI0WiIvPjwvc3ZnPg==');
-                            background-size: 25px 25px;
-                            background-position: center;
-                            background-repeat: no-repeat;
-
-                            & + label {
-                                text-decoration: line-through;
-                                color: #ADADAD;
-                            }
-                        }
-                    }
-                }         
-            }
-
-            .btn-todo {
-                display: flex;
-                gap: 10px;
-                margin-left: 20px;
-                opacity: 0;
-                visibility: hidden;
-                transition: .3s;
-
-                .icon-btn {
-                    color: #ADADAD;
-                    transition: .3s;
-                }
-
-                .btn-edit {
-                    padding: 2px;
-                    transition: .3s;
-                    border-radius: 5px;
-
-                    &:hover {
-                        background-color: #61f144;
-
-                        .icon-btn {
-                            color: #fff;
-                        }
-                    }
-                }
-
-                .btn-delete {
-                    padding: 2px;
-                    transition: .3s;
-                    border-radius: 5px;
-
-                    &:hover {
-                        background-color: #f14444;
-
-                        .icon-btn {
-                            color: $white-text;
-                        }
-                    }
-                }
-            }
-        }
-    }
+  }
 }
