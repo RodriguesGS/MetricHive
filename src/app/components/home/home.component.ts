@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsContactComponent } from "../forms-contact/forms-contact.component";
+import { FormsContactComponent } from '../forms-contact/forms-contact.component';
 
 interface Task {
   id: number;
@@ -10,16 +10,28 @@ interface Task {
   completed: boolean;
 }
 
+interface Card {
+  amount: number;
+  description: string;
+  icon: string;
+  color: string;
+}
+
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MatIconModule, CommonModule, FormsModule, FormsContactComponent],
+  imports: [CommonModule, FormsModule, MatIconModule, FormsContactComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
   newTask: string = '';
   tasks: Task[] = [];
+  cards: Card[] = [
+    { amount: 50, description: 'Produtos cadastrados', icon: 'shopping_bag', color: 'card-color1' },
+    { amount: 23, description: 'Clientes cadastrados', icon: 'person', color: 'card-color2' },
+    { amount: 0, description: 'Notas emitidas', icon: 'receipt', color: 'card-color3' },
+  ];
 
   ngOnInit(): void {
     this.loadTasks();
@@ -78,5 +90,9 @@ export class HomeComponent implements OnInit {
       this.tasks.push(exampleTask);
       this.saveTasks();
     }
+  }
+
+  getCardClass(color: string): string {
+    return color;
   }
 }
