@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsContactComponent } from '../forms-contact/forms-contact.component';
+import { ProductsService } from '../products/products.service';
 
 interface Task {
   id: number;
@@ -28,14 +29,21 @@ export class HomeComponent implements OnInit {
   newTask: string = '';
   tasks: Task[] = [];
   cards: Card[] = [
-    { amount: 50, description: 'Produtos cadastrados', icon: 'shopping_bag', color: 'card-color1' },
+    { amount: 0, description: 'Produtos cadastrados', icon: 'shopping_bag', color: 'card-color1' },
     { amount: 23, description: 'Clientes cadastrados', icon: 'person', color: 'card-color2' },
     { amount: 0, description: 'Notas emitidas', icon: 'receipt', color: 'card-color3' },
   ];
 
+  constructor(private productsService: ProductsService) {}
+
   ngOnInit(): void {
     this.loadTasks();
+    this.updateProductCount();
     this.addExampleTask();
+  }
+
+  updateProductCount(): void {
+    this.cards[0].amount = this.productsService.getProductCount();
   }
 
   addTask(): void {
