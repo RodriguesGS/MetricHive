@@ -5,12 +5,12 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-cookies',
   standalone: true,
-  imports: [MatIconModule, CommonModule],
+  imports: [ MatIconModule, CommonModule ],
   templateUrl: './cookies.component.html',
   styleUrl: './cookies.component.scss',
 })
 export class CookiesComponent {
-  consentGiven = true;
+  consentGiven = false;
 
   acceptCookies(): void {
     this.consentGiven = true;

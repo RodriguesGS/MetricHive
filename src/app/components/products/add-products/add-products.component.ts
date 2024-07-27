@@ -9,14 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 @Component({
   selector: 'app-add-products',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatDialogModule
-  ],
+  imports: [ CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule,MatButtonModule, MatDialogModule ],
   templateUrl: './add-products.component.html',
   styleUrls: ['./add-products.component.scss']
 })

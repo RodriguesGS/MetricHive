@@ -1,7 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 import { FormsContactComponent } from '../forms-contact/forms-contact.component';
 import { ProductsService } from '../products/products.service';
 
@@ -34,7 +35,7 @@ export class HomeComponent implements OnInit {
     { amount: 0, description: 'Notas emitidas', icon: 'receipt', color: 'card-color3' },
   ];
 
-  constructor(private productsService: ProductsService) {}
+  constructor(private productsService: ProductsService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadTasks();
@@ -102,5 +103,10 @@ export class HomeComponent implements OnInit {
 
   getCardClass(color: string): string {
     return color;
+  }
+
+  goToProducts(event: Event): void {
+    event.preventDefault();
+    this.router.navigate(['/products']);
   }
 }

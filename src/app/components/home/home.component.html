@@ -8,7 +8,8 @@
       <mat-icon class="icon">{{ card.icon }}</mat-icon>
     </div>
     <div class="link-card">
-      <a href="#">Ver mais <mat-icon>arrow_circle_right</mat-icon></a>
+      <a href="#" *ngIf="card.description === 'Produtos cadastrados'" (click)="goToProducts($event)">Ver mais <mat-icon>arrow_circle_right</mat-icon></a>
+      <a href="#" *ngIf="card.description !== 'Produtos cadastrados'">Ver mais <mat-icon>arrow_circle_right</mat-icon></a>
     </div>
   </div>
 </div>
@@ -38,4 +39,4 @@
   </ul>
 </div>
 
-<app-forms-contact/>
+<app-forms-contact></app-forms-contact>
