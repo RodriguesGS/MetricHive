@@ -1,0 +1,115 @@
+@import '../../../styles/variables.scss';
+
+:host {
+    padding: 50px 0;
+    display: block;
+
+    .title-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        h1 {
+            font-size: 2.3rem;
+            font-weight: 700;
+
+            &:after {
+                content: "";
+                height: 3px;
+                display: block;
+                width: 80%;
+                margin-top: 5px;
+                background-color: $color-main;
+            }
+        }
+
+        .title-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 2.3rem;
+            color: #C5C5C5;
+        }
+    }
+
+    .btn-actions {
+        padding-top: 50px;
+        display: flex;
+        gap: 40px;
+
+        .btn-choose {
+            font-size: 1rem;
+            background-color: $btn-color;
+            color: $white-text;
+            padding: 16px 24px;
+            border-radius: 10px;
+            transition: .5s;
+
+            &.disabled {
+                opacity: .3;   
+            }
+        }
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+
+        .table {
+            width: 100%;
+            margin-top: 50px;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+
+            thead {
+                font-size: 1.3rem;
+                background-color: #D9D9D9;
+                color: #8d8d8d;
+
+                th {
+                    padding: 8px;
+                }
+            }
+
+            tbody {
+                text-align: center;
+                color: #111;
+                font-weight: 600;
+
+                tr {
+                    background-color: $white-text;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+                    &:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+                    }
+
+                    td {
+                        padding: 15px 0;
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+
+        .add-client {
+            background-color: $black-text;
+            margin-top: 30px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            color: $white-text;
+            font-size: 1rem;
+            transition: .3s ease;
+            border: 2px solid transparent;
+            font-weight: 600;
+
+            &:hover {
+                border-color: $black-text;
+                background-color: transparent;
+                color: $black-text;
+            }
+        }
+    }
+}
