@@ -1,0 +1,25 @@
+@import '../../../../styles/variables.scss';
+
+:host {
+    display: block;
+    border-radius: 35px;
+    padding: 20px;
+    border-radius: 10px;
+
+    h2 {
+        font-size: 1.6rem;
+
+        &:after {
+            display: block;
+            content: "";
+            width: 10%;
+            height: 2px;
+            background-color: $color-main;
+        }
+    }
+
+    .forms-modal {
+        display: flex;
+        flex-direction: column;
+    }
+}

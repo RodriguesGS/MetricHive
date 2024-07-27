@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './cookies.component.scss',
 })
 export class CookiesComponent {
-  consentGiven = false;
+  consentGiven = true;
 
   acceptCookies(): void {
     this.consentGiven = true;

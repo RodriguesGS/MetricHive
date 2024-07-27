@@ -1,1 +1,32 @@
-<p>products works!</p>
+<div class="title-container">
+  <h1>Produtos</h1>
+  <mat-icon class="title-icon">category</mat-icon>
+</div>
+
+<div class="container">
+  <button class="btn-add" (click)="openAddDialog()">+ Add Item</button>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nome</th>
+        <th>NCM</th>
+        <th>Preço</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.ncm }}</td>
+        <td>R{{ product.price |  currency }}</td>
+        <td class="actions">
+          <button class="btn btn-edit" (click)="openEditDialog(product, i)">Editar <mat-icon class="action-btn">edit</mat-icon></button>
+          <button class="btn btn-delete" (click)="openDeleteDialog(product, i)">Excluir <mat-icon class="action-btn">delete</mat-icon></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
