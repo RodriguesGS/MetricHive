@@ -1,0 +1,31 @@
+@import '../../../../styles/variables.scss';
+
+:host {
+    display: block;
+    padding: 15px;
+
+    h2 {
+        font-size: 1.6rem;
+
+        &:after {
+            display: block;
+            content: "";
+            width: 10%;
+            height: 2px;
+            background-color: $color-main;
+        }
+    }
+
+    .forms-delete {
+        font-size: 1rem;
+
+        .forms-input {
+            width: 100%;
+
+            mat-error {
+                font-size: 1.2rem;
+                margin: 10px 0;
+            }
+        }
+    }
+}

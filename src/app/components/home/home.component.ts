@@ -1,8 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 import { FormsContactComponent } from '../forms-contact/forms-contact.component';
+import { ProductsService } from '../products/products.service';
 
 interface Task {
   id: number;
@@ -28,14 +30,21 @@ export class HomeComponent implements OnInit {
   newTask: string = '';
   tasks: Task[] = [];
   cards: Card[] = [
-    { amount: 50, description: 'Produtos cadastrados', icon: 'shopping_bag', color: 'card-color1' },
+    { amount: 0, description: 'Produtos cadastrados', icon: 'shopping_bag', color: 'card-color1' },
     { amount: 23, description: 'Clientes cadastrados', icon: 'person', color: 'card-color2' },
     { amount: 0, description: 'Notas emitidas', icon: 'receipt', color: 'card-color3' },
   ];
 
+  constructor(private productsService: ProductsService, private router: Router) {}
+
   ngOnInit(): void {
     this.loadTasks();
+    this.updateProductCount();
     this.addExampleTask();
+  }
+
+  updateProductCount(): void {
+    this.cards[0].amount = this.productsService.getProductCount();
   }
 
   addTask(): void {
@@ -94,5 +103,10 @@ export class HomeComponent implements OnInit {
 
   getCardClass(color: string): string {
     return color;
+  }
+
+  goToProducts(event: Event): void {
+    event.preventDefault();
+    this.router.navigate(['/products']);
   }
 }
