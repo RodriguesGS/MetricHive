@@ -1,0 +1,23 @@
+<h1 class="modal-title">Cadastrar Cliente</h1>
+<div class="modal-content">
+  <div class="client-type">
+    <span>Tipo do cliente: {{ data.type === 'juridico' ? 'Jurídico' : 'Físico' }}</span>
+  </div>
+
+  <div class="input-group">
+    <mat-form-field appearance="fill">
+      <mat-label>{{ data.type === 'juridico' ? 'CNPJ' : 'CPF' }}</mat-label>
+      <input matInput [(ngModel)]="data.cnpj" *ngIf="data.type === 'juridico'">
+      <input matInput [(ngModel)]="data.cpf" *ngIf="data.type === 'fisico'">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ data.type === 'juridico' ? 'Razão Social' : 'Nome' }}</mat-label>
+      <input matInput [(ngModel)]="data.razaoSocial" *ngIf="data.type === 'juridico'">
+      <input matInput [(ngModel)]="data.nome" *ngIf="data.type === 'fisico'">
+    </mat-form-field>
+  </div>
+</div>
+<div class="modal-actions">
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data">Salvar</button>
+</div>
