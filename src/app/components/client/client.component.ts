@@ -11,7 +11,7 @@ import { AddClientComponent } from './add-client/add-client.component';
 const ELEMENT_DATA: Cliente[] = [
   { id: 1, type: 'juridico', razaoSocial: 'Empresa Juridica 1', cnpj: '00.000.000/0001-00', ufCidade: 'PR / Maringá', number: '11 91234-5678' },
   { id: 2, type: 'juridico', razaoSocial: 'Empresa Juridica 2', cnpj: '00.000.000/0002-00', ufCidade: 'PR / Maringá', number: '11 91234-5678' },
-  { id: 1, type: 'fisico', nome: 'Cliente Fisico 1', cpf: '000.000.000-00', ufCidade: 'PR / Maringá', number: '11 91234-5678' }
+  { id: 3, type: 'fisico', nome: 'Cliente Fisico 1', cpf: '000.000.000-00', ufCidade: 'PR / Maringá', number: '11 91234-5678' }
 ];
 
 @Component({
@@ -46,7 +46,7 @@ export class ClientComponent {
 
   openAddClientDialog(): void {
     const dialogRef = this.dialog.open(AddClientComponent, {
-      width: '600px',
+      width: '1000px',
       data: { type: this.selectedTab }
     });
 

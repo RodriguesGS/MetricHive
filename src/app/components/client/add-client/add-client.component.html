@@ -1,23 +1,79 @@
-<h1 class="modal-title">Cadastrar Cliente</h1>
-<div class="modal-content">
+<h2 class="modal-title">Cadastrar cliente</h2>
+
+<div class="container">
   <div class="client-type">
-    <span>Tipo do cliente: {{ data.type === 'juridico' ? 'Jurídico' : 'Físico' }}</span>
+    <span>Tipo de cliente:</span>
+    
+    <div class="client-input">
+      <input type="radio" name="clientType" id="juridico" [(ngModel)]="data.type" value="juridico" checked>
+      <label for="juridico">Jurídico</label>
+    </div>
+
+    <div class="client-input">
+      <input type="radio" name="clientType" id="fisico" [(ngModel)]="data.type" value="fisico">
+      <label for="fisico">Físico</label>
+    </div>
   </div>
 
   <div class="input-group">
-    <mat-form-field appearance="fill">
-      <mat-label>{{ data.type === 'juridico' ? 'CNPJ' : 'CPF' }}</mat-label>
-      <input matInput [(ngModel)]="data.cnpj" *ngIf="data.type === 'juridico'">
-      <input matInput [(ngModel)]="data.cpf" *ngIf="data.type === 'fisico'">
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>{{ data.type === 'juridico' ? 'Razão Social' : 'Nome' }}</mat-label>
-      <input matInput [(ngModel)]="data.razaoSocial" *ngIf="data.type === 'juridico'">
-      <input matInput [(ngModel)]="data.nome" *ngIf="data.type === 'fisico'">
-    </mat-form-field>
+    <div class="query">
+      <input type="number" id="cnpj" class="input" placeholder="Digite o CNPJ" [(ngModel)]="data.cnpj" *ngIf="data.type === 'juridico'">
+      <button class="btn-query" (click)="consultar()"><mat-icon>search</mat-icon> Consultar</button>
+    </div>
+
+    <div class="inputs-query">
+      <input type="text" class="input" placeholder="Razão Social" [(ngModel)]="data.razaoSocial" *ngIf="data.type === 'juridico'">
+      <input type="text" class="input" placeholder="Nome" [(ngModel)]="data.nome" *ngIf="data.type === 'fisico'">
+      <input type="number" class="input" placeholder="CEP" [(ngModel)]="data.cep" *ngIf="data.type === 'juridico'">
+      <input type="number" class="input" placeholder="CPF" [(ngModel)]="data.cpf" *ngIf="data.type === 'fisico'">
+      <input type="number" class="input" placeholder="Telefone" [(ngModel)]="data.telefone">
+      <input type="text" class="input" placeholder="Nome Fantasia" [(ngModel)]="data.nomeFantasia" *ngIf="data.type === 'juridico'">
+      
+      <select [(ngModel)]="selectedState" (change)="onStateChange($event)">
+        <option value="" disabled>UF</option>
+        <option value="AC">AC</option>
+        <option value="AL">AL</option>
+        <option value="AP">AP</option>
+        <option value="AM">AM</option>
+        <option value="BA">BA</option>
+        <option value="CE">CE</option>
+        <option value="DF">DF</option>
+        <option value="ES">ES</option>
+        <option value="GO">GO</option>
+        <option value="MA">MA</option>
+        <option value="MT">MT</option>
+        <option value="MS">MS</option>
+        <option value="MG">MG</option>
+        <option value="PA">PA</option>
+        <option value="PB">PB</option>
+        <option value="PR">PR</option>
+        <option value="PE">PE</option>
+        <option value="PI">PI</option>
+        <option value="RJ">RJ</option>
+        <option value="RN">RN</option>
+        <option value="RS">RS</option>
+        <option value="RO">RO</option>
+        <option value="RR">RR</option>
+        <option value="SC">SC</option>
+        <option value="SP">SP</option>
+        <option value="SE">SE</option>
+        <option value="TO">TO</option>
+      </select>
+      
+      <select [(ngModel)]="data.cidade">
+        <option value="" disabled selected>Cidade</option>
+        <option *ngFor="let city of cities">{{city}}</option>
+      </select>
+      
+      <input type="text" class="input" placeholder="Logradouro" [(ngModel)]="data.logradouro">
+      <input type="text" class="input" placeholder="Bairro" [(ngModel)]="data.bairro" *ngIf="data.type === 'fisico'">
+      <input type="text" class="input" placeholder="Complemento" [(ngModel)]="data.complemento">
+      <input type="number" class="input" placeholder="Inscrição Estadual" [(ngModel)]="data.inscricaoEstadual" *ngIf="data.type === 'juridico'">
+    </div>
   </div>
 </div>
+
 <div class="modal-actions">
-  <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button [mat-dialog-close]="data">Salvar</button>
+  <button class="btn-action" (click)="onNoClick()">Cancelar</button>
+  <button class="btn-action" [mat-dialog-close]="data">Salvar</button>
 </div>
