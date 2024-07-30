@@ -4,7 +4,7 @@
     <mat-form-field class="form-field">
       <mat-label>Nome</mat-label>
       <input matInput formControlName="name">
-      <mat-error *ngIf="addItemForm.get('ncm')?.invalid && addItemForm.get('ncm')?.touched">
+      <mat-error *ngIf="addItemForm.get('name')?.invalid && addItemForm.get('name')?.touched">
         O Item deve ter entre 3 e 80 caracteres.
       </mat-error>
     </mat-form-field>
