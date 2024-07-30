@@ -7,10 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { municipios } from './cidades'; 
-
-type Estado = 'AC' | 'AL' | 'AP' | 'AM' | 'BA' | 'CE' | 'DF' | 'ES' | 'GO' | 'MA' | 'MT' | 'MS' | 'MG' | 'PA' | 'PB' | 'PR' | 'PE' | 'PI' | 'RJ' | 'RN' | 'RS' | 'RO' | 'RR' | 'SC' | 'SP' | 'SE' | 'TO';
+import { HttpClientModule, HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { municipios, Estado } from './cidades'; 
 
 @Component({
   selector: 'app-add-client',
@@ -29,8 +27,10 @@ type Estado = 'AC' | 'AL' | 'AP' | 'AM' | 'BA' | 'CE' | 'DF' | 'ES' | 'GO' | 'MA
   styleUrls: ['./add-client.component.scss']
 })
 export class AddClientComponent {
-  selectedState: Estado | '' = '';
-  cities: string[] = [];
+  selectedState: Estado = 'PR';
+  selectedCity: string = 'MARINGA';
+  cities: string[] = municipios['PR'];
+  estados: Estado[] = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
   
   constructor(
     public dialogRef: MatDialogRef<AddClientComponent>,
@@ -40,16 +40,39 @@ export class AddClientComponent {
     if (!this.data.type) {
       this.data.type = 'juridico';
     }
+    if (this.data.uf) {
+      this.selectedState = this.data.uf;
+      this.updateCities();
+      this.selectedCity = this.data.cidade;
+    } else {
+      this.data.uf = this.selectedState;
+      this.data.cidade = this.selectedCity;
+    }
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  onStateChange(event: Event): void {
-    const target = event.target as HTMLSelectElement;
-    this.selectedState = target.value as Estado;
-    this.cities = municipios[this.selectedState] || [];
+  onStateChange(state: Estado): void {
+    this.selectedState = state;
+    this.data.uf = state;
+    this.updateCities();
+  }
+
+  onCityChange(city: string): void {
+    this.selectedCity = city;
+    this.data.cidade = city;
+  }
+
+  updateCities(): void {
+    if (this.selectedState) {
+      this.cities = municipios[this.selectedState] || [];
+      if (!this.cities.includes(this.data.cidade)) {
+        this.data.cidade = this.cities.length > 0 ? this.cities[0] : '';
+        this.selectedCity = this.data.cidade;
+      }
+    }
   }
 
   consultar(): void {
@@ -60,19 +83,50 @@ export class AddClientComponent {
     }
   }
 
-  consultarCNPJ(cnpj: string): void {
-    const url = `https://www.receitaws.com.br/v1/cnpj/${cnpj}`;
-    this.http.get(url).subscribe((response: any) => {
-      this.data.razaoSocial = response.nome;
-      this.data.nomeFantasia = response.fantasia;
-      this.data.logradouro = response.logradouro;
-      this.data.bairro = response.bairro;
-      this.data.cep = response.cep;
-      this.data.telefone = response.telefone;
-      this.data.complemento = response.complemento;
-      // Adicione outros campos conforme necessário
-    }, error => {
-      console.error('Erro ao consultar CNPJ:', error);
+  private consultarCNPJ(cnpj: string): void {
+    const url = `./api/cnpj/${cnpj}`;
+    this.http.get(url).subscribe({
+      next: (response: any) => {
+        console.log('Resposta da API:', response); 
+        if (response && response.nome) {
+          this.updateClientData(response);
+        } else {
+          console.error('Resposta inesperada:', response);
+        }
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Erro ao consultar CNPJ:', error);
+      },
+      complete: () => {
+        console.log('Consulta de CNPJ completa.');
+      }
     });
+  }
+  
+
+  private updateClientData(response: any): void {
+    this.data.razaoSocial = response.nome;
+    this.data.nomeFantasia = response.fantasia;
+    this.data.logradouro = response.logradouro;
+    this.data.bairro = response.bairro;
+    this.data.cep = response.cep;
+    this.data.contato = response.email || response.telefone; 
+    this.data.uf = response.uf;
+    this.selectedState = response.uf as Estado;
+    this.updateCities();
+    this.data.cidade = response.municipio;
+    this.selectedCity = response.municipio;
+    this.data.complemento = response.complemento;
+  }
+
+  allFieldsFilled(): boolean {
+    if (this.data.type === 'juridico') {
+      return this.data.cnpj && this.data.razaoSocial && this.data.cep && this.data.contato &&
+             this.data.nomeFantasia && this.data.logradouro && this.data.complemento &&
+             this.data.inscricaoEstadual && this.selectedState && this.selectedCity;
+    } else {
+      return this.data.nome && this.data.cpf && this.data.contato && this.data.logradouro &&
+             this.data.bairro && this.data.complemento && this.selectedState && this.selectedCity;
+    }
   }
 }

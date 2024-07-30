@@ -1,23 +1,6 @@
-<h2 class="modal-title">Cadastrar cliente</h2>
+<h2 class="modal-title">Editar cliente</h2>
 <div class="container">
-  <div class="client-type">
-    <span>Tipo de cliente:</span>
-    <div class="client-input">
-      <input type="radio" name="clientType" id="juridico" [(ngModel)]="data.type" value="juridico" checked>
-      <label for="juridico">Jurídico</label>
-    </div>
-    <div class="client-input">
-      <input type="radio" name="clientType" id="fisico" [(ngModel)]="data.type" value="fisico">
-      <label for="fisico">Físico</label>
-    </div>
-  </div>
-
   <div class="input-group">
-    <div class="query">
-      <input type="number" id="cnpj" class="input" placeholder="Digite o CNPJ" [(ngModel)]="data.cnpj" *ngIf="data.type === 'juridico'">
-      <button class="btn-query" (click)="consultar()"><mat-icon>search</mat-icon> Consultar</button>
-    </div>
-
     <div class="inputs-query">
       <input type="text" class="input" placeholder="Razão Social" [(ngModel)]="data.razaoSocial" *ngIf="data.type === 'juridico'">
       <input type="text" class="input" placeholder="Nome" [(ngModel)]="data.nome" *ngIf="data.type === 'fisico'">
@@ -27,10 +10,12 @@
       <input type="text" class="input" placeholder="Nome Fantasia" [(ngModel)]="data.nomeFantasia" *ngIf="data.type === 'juridico'">
       
       <select [(ngModel)]="selectedState" (ngModelChange)="onStateChange($event)">
+        <option value="" disabled>UF</option>
         <option *ngFor="let state of estados" [value]="state">{{state}}</option>
       </select>
       
-      <select [(ngModel)]="selectedCity" (ngModelChange)="onCityChange($event)">
+      <select [(ngModel)]="data.cidade">
+        <option value="" selected>Cidade</option>
         <option *ngFor="let city of cities" [value]="city">{{city}}</option>
       </select>
       
@@ -44,5 +29,6 @@
 
 <div class="modal-actions">
   <button class="btn-action" (click)="onNoClick()">Cancelar</button>
-  <button class="btn-action" [disabled]="!allFieldsFilled()" [mat-dialog-close]="data">Salvar</button>
+  <button class="btn-action" (click)="delete()">Excluir</button>
+  <button class="btn-action" (click)="save()">Salvar</button>
 </div>
