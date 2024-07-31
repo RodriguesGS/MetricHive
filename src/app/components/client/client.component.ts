@@ -8,6 +8,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Cliente } from './client';
 import { AddClientComponent } from './add-client/add-client.component';
 import { EditClientComponent } from './edit-client/edit-client.component';
+import { DeleteClientComponent } from './delete-client/delete-client.component';
+import { ClientService } from './client.service';
 
 const LOCAL_STORAGE_KEY = 'clientes';
 
@@ -22,7 +24,8 @@ const LOCAL_STORAGE_KEY = 'clientes';
     MatIconModule,
     MatDialogModule,
     AddClientComponent,
-    EditClientComponent
+    EditClientComponent,
+    DeleteClientComponent
   ],
   templateUrl: './client.component.html',
   styleUrls: ['./client.component.scss']
@@ -30,13 +33,17 @@ const LOCAL_STORAGE_KEY = 'clientes';
 export class ClientComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nomeRazaoSocial', 'cpfCnpj', 'ufCidade', 'number'];
   dataSource: Cliente[] = [];
-  selectedTab: 'juridico' | 'fisico' = 'juridico';
+  selectedTab: 'juridico' | 'fisico' = 'juridico'; // Defina o tipo padrão
 
-  constructor(public dialog: MatDialog) {}
+
+  constructor(private clientService: ClientService, public dialog: MatDialog) {}
 
   ngOnInit() {
-    this.loadFromLocalStorage();
+    this.clientService.clientes$.subscribe(clientes => {
+      this.dataSource = clientes;
+    });
   }
+  
 
   get filteredDataSource() {
     return this.dataSource.filter(cliente => cliente.type === this.selectedTab);
@@ -49,7 +56,7 @@ export class ClientComponent implements OnInit {
   openAddClientDialog(): void {
     const dialogRef = this.dialog.open(AddClientComponent, {
       width: '1000px',
-      data: { type: this.selectedTab }
+      data: { type: this.selectedTab } // Passa o tipo selecionado atualmente
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -78,10 +85,20 @@ export class ClientComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         if (result.delete) {
-          this.deleteClient(result.id);
+          this.confirmDeleteClient(result.id);
         } else {
           this.updateClient(result);
         }
+      }
+    });
+  }
+
+  confirmDeleteClient(id: number): void {
+    const dialogRef = this.dialog.open(DeleteClientComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteClient(id);
       }
     });
   }
@@ -112,7 +129,7 @@ export class ClientComponent implements OnInit {
   }
 
   getClienteCpfCnpj(cliente: Cliente): string {
-    return cliente.type === 'juridico' ? cliente.cnpj : cliente.cpf;
+    return cliente.type === 'juridico' ? cliente.cnpj : this.formatCPF(cliente.cpf);
   }
 
   getClienteNomeRazaoSocial(cliente: Cliente): string {
@@ -123,6 +140,15 @@ export class ClientComponent implements OnInit {
     return cnpj.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5");
   }
 
+  private formatCPF(cpf: string | number): string {
+    if (!cpf) {
+      return ''; // Retorna uma string vazia se o CPF for undefined ou null
+    }
+    
+    const cpfStr = String(cpf); // Converte o CPF para string, se não for
+    return cpfStr.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
+  }
+  
   private capitalize(str: string): string {
     return str.toLowerCase().replace(/\b\w/g, char => char.toUpperCase());
   }

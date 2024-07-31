@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -26,20 +26,24 @@ import { municipios, Estado } from './cidades';
   templateUrl: './add-client.component.html',
   styleUrls: ['./add-client.component.scss']
 })
-export class AddClientComponent {
+export class AddClientComponent implements OnInit {
   selectedState: Estado = 'PR';
   selectedCity: string = 'MARINGA';
   cities: string[] = municipios['PR'];
   estados: Estado[] = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
-  
+
   constructor(
     public dialogRef: MatDialogRef<AddClientComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private http: HttpClient
-  ) {
+  ) {}
+
+  ngOnInit() {
+    // Certifique-se de que o tipo de cliente seja corretamente inicializado
     if (!this.data.type) {
-      this.data.type = 'juridico';
+      this.data.type = 'juridico'; // Defina um valor padrão se `type` não for passado
     }
+
     if (this.data.uf) {
       this.selectedState = this.data.uf;
       this.updateCities();
@@ -102,7 +106,6 @@ export class AddClientComponent {
       }
     });
   }
-  
 
   private updateClientData(response: any): void {
     this.data.razaoSocial = response.nome;
@@ -121,12 +124,18 @@ export class AddClientComponent {
 
   allFieldsFilled(): boolean {
     if (this.data.type === 'juridico') {
-      return this.data.cnpj && this.data.razaoSocial && this.data.cep && this.data.contato &&
-             this.data.nomeFantasia && this.data.logradouro && this.data.complemento &&
-             this.data.inscricaoEstadual && this.selectedState && this.selectedCity;
+      return this.data.cnpj && this.data.razaoSocial && this.data.contato &&
+             this.data.nomeFantasia && this.data.bairro && this.selectedState && this.selectedCity;
     } else {
-      return this.data.nome && this.data.cpf && this.data.contato && this.data.logradouro &&
-             this.data.bairro && this.data.complemento && this.selectedState && this.selectedCity;
+      return this.data.nome && this.data.cpf && this.data.contato && this.data.bairro && this.selectedState && this.selectedCity;
+    }
+  }
+
+  onSaveClick(): void {
+    if (this.allFieldsFilled()) {
+      this.dialogRef.close(this.data);
+    } else {
+      console.error('Preencha todos os campos obrigatórios.');
     }
   }
 }

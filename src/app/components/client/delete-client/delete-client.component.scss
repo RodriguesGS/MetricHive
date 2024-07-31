@@ -1,0 +1,41 @@
+@import "../../../../styles/variables.scss";
+
+:host {
+    display: block;
+    padding: 20px;
+
+    h2 {
+        font-size: 1.6rem;
+
+        &:after {
+            display: block;
+            content: "";
+            width: 40%;
+            height: 2px;
+            background-color: $color-main;
+          }
+    }
+
+    .actions {
+        display: flex;
+        justify-content: space-around;
+
+        button {
+            padding: 12px 24px;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: .5s ease;
+
+            &.cancel-action:hover {
+                background-color: $color-main;
+                color: $white-text;
+            }
+
+            &.confirm-action:hover {
+                background-color: #f53c3c;
+                color: $white-text;
+            }
+        }
+    }
+}
