@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { FormsContactComponent } from '../forms-contact/forms-contact.component';
 import { ProductsService } from '../products/products.service';
+import { ClientService } from '../client/client.service';
 
 interface Task {
   id: number;
@@ -31,20 +32,31 @@ export class HomeComponent implements OnInit {
   tasks: Task[] = [];
   cards: Card[] = [
     { amount: 0, description: 'Produtos cadastrados', icon: 'shopping_bag', color: 'card-color1' },
-    { amount: 23, description: 'Clientes cadastrados', icon: 'person', color: 'card-color2' },
+    { amount: 0, description: 'Clientes cadastrados', icon: 'person', color: 'card-color2' },
     { amount: 0, description: 'Notas emitidas', icon: 'receipt', color: 'card-color3' },
   ];
 
-  constructor(private productsService: ProductsService, private router: Router) {}
+  constructor(
+    private productsService: ProductsService, 
+    private clientService: ClientService, 
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadTasks();
     this.updateProductCount();
+    this.subscribeToClientUpdates(); // Atualiza a quantidade de clientes dinamicamente
     this.addExampleTask();
   }
 
   updateProductCount(): void {
     this.cards[0].amount = this.productsService.getProductCount();
+  }
+
+  subscribeToClientUpdates(): void {
+    this.clientService.clientes$.subscribe(clientes => {
+      this.cards[1].amount = clientes.length;
+    });
   }
 
   addTask(): void {

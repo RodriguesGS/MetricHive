@@ -3,7 +3,7 @@
   <div class="client-type">
     <span>Tipo de cliente:</span>
     <div class="client-input">
-      <input type="radio" name="clientType" id="juridico" [(ngModel)]="data.type" value="juridico" checked>
+      <input type="radio" name="clientType" id="juridico" [(ngModel)]="data.type" value="juridico">
       <label for="juridico">Jurídico</label>
     </div>
     <div class="client-input">
@@ -13,18 +13,29 @@
   </div>
 
   <div class="input-group">
-    <div class="query">
-      <input type="number" id="cnpj" class="input" placeholder="Digite o CNPJ" [(ngModel)]="data.cnpj" *ngIf="data.type === 'juridico'">
+    <!-- Campos específicos para Jurídico -->
+    <div class="query" *ngIf="data.type === 'juridico'">
+      <input type="number" id="cnpj" class="input" placeholder="Digite o CNPJ*" [(ngModel)]="data.cnpj">
       <button class="btn-query" (click)="consultar()"><mat-icon>search</mat-icon> Consultar</button>
     </div>
 
     <div class="inputs-query">
-      <input type="text" class="input" placeholder="Razão Social" [(ngModel)]="data.razaoSocial" *ngIf="data.type === 'juridico'">
-      <input type="text" class="input" placeholder="Nome" [(ngModel)]="data.nome" *ngIf="data.type === 'fisico'">
+      <input type="text" class="input" placeholder="Razão Social*" [(ngModel)]="data.razaoSocial" *ngIf="data.type === 'juridico'">
+      <input type="text" class="input" placeholder="Nome Fantasia*" [(ngModel)]="data.nomeFantasia" *ngIf="data.type === 'juridico'">
+      <input type="text" class="input" placeholder="Contato*" [(ngModel)]="data.contato" *ngIf="data.type === 'juridico'">
+      <input type="text" class="input" placeholder="Bairro*" [(ngModel)]="data.bairro" *ngIf="data.type === 'juridico'">
       <input type="text" class="input" placeholder="CEP" [(ngModel)]="data.cep" *ngIf="data.type === 'juridico'">
-      <input type="number" class="input" placeholder="CPF" [(ngModel)]="data.cpf" *ngIf="data.type === 'fisico'">
-      <input type="text" class="input" placeholder="Contato" [(ngModel)]="data.contato">
-      <input type="text" class="input" placeholder="Nome Fantasia" [(ngModel)]="data.nomeFantasia" *ngIf="data.type === 'juridico'">
+      <input type="text" class="input" placeholder="Complemento" [(ngModel)]="data.complemento" *ngIf="data.type === 'juridico'">
+      <input type="number" class="input" placeholder="Inscrição Estadual" [(ngModel)]="data.inscricaoEstadual" *ngIf="data.type === 'juridico'">
+      
+      <!-- Campos específicos para Físico -->
+      <input type="text" class="input" placeholder="Nome*" [(ngModel)]="data.nome" *ngIf="data.type === 'fisico'">
+      <input type="number" class="input" placeholder="CPF*" [(ngModel)]="data.cpf" *ngIf="data.type === 'fisico'">
+      <input type="text" class="input" placeholder="Contato*" [(ngModel)]="data.contato" *ngIf="data.type === 'fisico'">
+      <input type="text" class="input" placeholder="CEP" [(ngModel)]="data.cep" *ngIf="data.type === 'fisico'">
+      <input type="text" class="input" placeholder="Logradouro" [(ngModel)]="data.logradouro" *ngIf="data.type === 'fisico'">
+      <input type="text" class="input" placeholder="Complemento" [(ngModel)]="data.complemento" *ngIf="data.type === 'fisico'">
+      <input type="text" class="input" placeholder="Bairro*" [(ngModel)]="data.bairro" *ngIf="data.type === 'fisico'">
       
       <select [(ngModel)]="selectedState" (ngModelChange)="onStateChange($event)">
         <option *ngFor="let state of estados" [value]="state">{{state}}</option>
@@ -33,11 +44,6 @@
       <select [(ngModel)]="selectedCity" (ngModelChange)="onCityChange($event)">
         <option *ngFor="let city of cities" [value]="city">{{city}}</option>
       </select>
-      
-      <input type="text" class="input" placeholder="Logradouro" [(ngModel)]="data.logradouro">
-      <input type="text" class="input" placeholder="Bairro" [(ngModel)]="data.bairro" *ngIf="data.type === 'fisico'">
-      <input type="text" class="input" placeholder="Complemento" [(ngModel)]="data.complemento">
-      <input type="number" class="input" placeholder="Inscrição Estadual" [(ngModel)]="data.inscricaoEstadual" *ngIf="data.type === 'juridico'">
     </div>
   </div>
 </div>

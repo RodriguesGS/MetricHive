@@ -1,34 +1,93 @@
 <h2 class="modal-title">Editar cliente</h2>
-<div class="container">
-  <div class="input-group">
-    <div class="inputs-query">
-      <input type="text" class="input" placeholder="Razão Social" [(ngModel)]="data.razaoSocial" *ngIf="data.type === 'juridico'">
-      <input type="text" class="input" placeholder="Nome" [(ngModel)]="data.nome" *ngIf="data.type === 'fisico'">
-      <input type="text" class="input" placeholder="CEP" [(ngModel)]="data.cep" *ngIf="data.type === 'juridico'">
-      <input type="number" class="input" placeholder="CPF" [(ngModel)]="data.cpf" *ngIf="data.type === 'fisico'">
-      <input type="text" class="input" placeholder="Contato" [(ngModel)]="data.contato">
-      <input type="text" class="input" placeholder="Nome Fantasia" [(ngModel)]="data.nomeFantasia" *ngIf="data.type === 'juridico'">
-      
-      <select [(ngModel)]="selectedState" (ngModelChange)="onStateChange($event)">
-        <option value="" disabled>UF</option>
-        <option *ngFor="let state of estados" [value]="state">{{state}}</option>
-      </select>
-      
-      <select [(ngModel)]="data.cidade">
-        <option value="" selected>Cidade</option>
-        <option *ngFor="let city of cities" [value]="city">{{city}}</option>
-      </select>
-      
-      <input type="text" class="input" placeholder="Logradouro" [(ngModel)]="data.logradouro">
-      <input type="text" class="input" placeholder="Bairro" [(ngModel)]="data.bairro" *ngIf="data.type === 'fisico'">
-      <input type="text" class="input" placeholder="Complemento" [(ngModel)]="data.complemento">
-      <input type="number" class="input" placeholder="Inscrição Estadual" [(ngModel)]="data.inscricaoEstadual" *ngIf="data.type === 'juridico'">
+
+<div class="input-group">
+  <!-- Cliente Jurídico -->
+  <ng-container *ngIf="data.type === 'juridico'">
+    <div class="input-query">
+      <label for="razaoSocial">Razão Social</label>
+      <input type="text" id="razaoSocial" class="input" placeholder="Razão Social" [(ngModel)]="data.razaoSocial">
     </div>
+    <div class="input-query">
+      <label for="cep">CEP</label>
+      <input type="text" class="input" id="cep" placeholder="CEP" [(ngModel)]="data.cep">
+    </div>
+    <div class="input-query">
+      <label for="contato">Contato</label>
+      <input type="text" id="contato" class="input" placeholder="Contato" [(ngModel)]="data.contato">
+    </div>
+    <div class="input-query">
+      <label for="nomeFantasia">Nome Fantasia</label>
+      <input type="text" class="input" id="nomeFantasia" placeholder="Nome Fantasia" [(ngModel)]="data.nomeFantasia">
+    </div>
+    <div class="input-query">
+      <label for="bairro">Bairro</label>
+      <input type="text" class="input" id="bairro" placeholder="Bairro" [(ngModel)]="data.bairro">
+    </div>
+    <div class="input-query">
+      <label for="complemento">Complemento</label>
+      <input type="text" class="input" id="complemento" placeholder="Complemento" [(ngModel)]="data.complemento">
+    </div>
+    <div class="input-query">
+      <label for="ie">Inscrição Estadual</label>
+      <input type="number" class="input" id="ie" placeholder="Inscrição Estadual" [(ngModel)]="data.inscricaoEstadual">
+    </div>
+  </ng-container>
+
+  <!-- Cliente Físico -->
+  <ng-container *ngIf="data.type === 'fisico'">
+    <div class="input-query">
+      <label for="nome">Nome</label>
+      <input type="text" class="input" id="nome" placeholder="Nome" [(ngModel)]="data.nome">
+    </div>
+    <div class="input-query">
+      <label for="cpf">CPF</label>
+      <input type="number" class="input" id="cpf" placeholder="CPF" [(ngModel)]="data.cpf">
+    </div>
+    <div class="input-query">
+      <label for="logradouro">Logradouro</label>
+      <input type="text" class="input" id="logradouro" placeholder="Logradouro" [(ngModel)]="data.logradouro">
+    </div>
+    <div class="input-query">
+      <label for="cep">CEP</label>
+      <input type="text" class="input" id="cep" placeholder="CEP" [(ngModel)]="data.cep">
+    </div>
+    <div class="input-query">
+      <label for="bairro">Bairro</label>
+      <input type="text" class="input" id="bairro" placeholder="Bairro" [(ngModel)]="data.bairro">
+    </div>
+    <div class="input-query">
+      <label for="complemento">Complemento</label>
+      <input type="text" class="input" id="complemento" placeholder="Complemento" [(ngModel)]="data.complemento">
+    </div>
+    <div class="input-query">
+      <label for="contato">Contato</label>
+      <input type="text" id="contato" class="input" placeholder="Contato" [(ngModel)]="data.contato">
+    </div>
+  </ng-container>
+
+  <!-- Campos Comuns -->
+  <div class="input-query">
+    <label for="uf">UF</label>
+    <select id="uf" [(ngModel)]="selectedState" (ngModelChange)="onStateChange($event)">
+      <option value="" disabled>UF</option>
+      <option *ngFor="let state of estados" [value]="state">{{state}}</option>
+    </select>
   </div>
+
+  <div class="input-query">
+    <label for="cidade">Cidade</label>
+    <select id="cidade" [(ngModel)]="data.cidade">
+      <option value="" disabled selected>Cidade</option>
+      <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+    </select>
+  </div>
+
 </div>
 
 <div class="modal-actions">
-  <button class="btn-action" (click)="onNoClick()">Cancelar</button>
-  <button class="btn-action" (click)="delete()">Excluir</button>
-  <button class="btn-action" (click)="save()">Salvar</button>
+  <button class="btn-action delete" (click)="delete()">Excluir</button>
+  <div>
+    <button class="btn-action" (click)="onNoClick()">Cancelar</button>
+    <button class="btn-action" (click)="save()">Salvar</button>
+  </div>
 </div>
